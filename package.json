@@ -6,7 +6,7 @@
   },
   "scripts": {
     "test": "./node_modules/grunt-cli/bin/grunt test",
-    "test-watch": "./node_modules/grunt-cli/bin/grunt test watch"
+    "test-watch": "./node_modules/grunt-cli/bin/grunt test watch --force"
   },
   "pre-commit": [
     "test"
