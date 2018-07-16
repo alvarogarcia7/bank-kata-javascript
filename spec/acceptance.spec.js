@@ -1,25 +1,28 @@
 "use strict";
 
-var chai = require('chai');
-var sinon = require('sinon');
-
-const wordWrap = require('./../src/prod');
+var chai = require('chai')
+var sinon = require('sinon')
+const expect = chai.expect
+var Clock = require('../src/clock')
+var Account = require('../src/account')
+var Amount = require('../src/amount')
 
 describe('Bank kata', () => {
     describe('acceptance test', ()=> {
       var clock;
+      var lines
 
       beforeEach(function () {
-        clock = Clock(
-          { getTime: function () { return {} } });
-      });
+        clock = Clock.aNew();
+        lines = []
+      })
 
       it('produces a statement after a few operations', () => {
         sinon.stub(clock, 'getTime').returns("30/10/2018", "20/10/2018");
-        var account = new Account(clock)
+        var account = Account.aNew(clock)
 
-        account.withdrawal("payslip", new Amount("100"))
-        account.deposit("grocery shopping", new Amount("15"))
+        account.withdrawal("payslip", Amount.EUR("100"))
+        account.deposit("grocery shopping", Amount.EUR("15"))
         account.printStatement(line=>{lines.push(line)})
 
         expect(lines).to.equal([
