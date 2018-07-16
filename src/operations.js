@@ -12,4 +12,8 @@ function withdrawal(description, amount, time){
   return new Operation(description, amount, time)
 }
 
-module.exports = {withdrawal}
+function deposit(description, amount, time){
+  return new Operation(description, amount, time)
+}
+
+module.exports = {withdrawal, deposit}
