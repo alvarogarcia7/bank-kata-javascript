@@ -25,7 +25,7 @@ describe('Bank kata', () => {
         account.deposit("grocery shopping", Amount.EUR("15"))
         account.printStatement(line=>{lines.push(line)})
 
-        expect(lines).to.equal([
+        expect(lines).to.deep.equals([
           "date || description || amount || balance",
           "30/10/2018 || payslip || 100,00 || 950,00",
           "20/10/2018 || grocery shopping || -15,00 || 850,00",
