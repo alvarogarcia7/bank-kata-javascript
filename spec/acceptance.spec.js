@@ -11,17 +11,18 @@ describe('Bank kata', () => {
     describe('acceptance test', ()=> {
       var clock;
       var lines
+      var account
 
       beforeEach(function () {
         clock = Clock.aNew();
         lines = []
+        account = Account.aNew(clock)
       })
 
       it('produces a statement after a few operations', () => {
         sinon.stub(clock, 'getTime')
           .onFirstCall().returns("20/10/2018")
           .onSecondCall().returns("30/10/2018")
-        var account = Account.aNew(clock)
 
         account.withdrawal("grocery shopping", Amount.EUR("15"))
         account.deposit("payslip", Amount.EUR("100"))
