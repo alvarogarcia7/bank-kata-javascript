@@ -7,6 +7,7 @@ class Account {
   constructor(clock, movements){
     this.clock = clock
     this.movements = movements || []
+    this.movements.push(Operations.previousBalance(Amount.EUR("865"), "01/10/2018"))
   }
   withdrawal(description, amount){
     amount.negative()
@@ -20,11 +21,12 @@ class Account {
     printerFn(this.statementHeader())
     var movements = [...this.movements]
     
-    var currentBalance = this.previousBalance()
+    var currentBalance = Operations.previousBalance(Amount.EUR("0"), "")
     movements
-      .map(row => {
+      .map((row,i) => {
         currentBalance.cumulate(row.amount)
         row.balance = currentBalance.amountFormatted()
+        row.hideAmount = i === 0
         return row
       })
       .map (row => {
@@ -32,17 +34,12 @@ class Account {
       })
       .reverse()
       .map(row => {
-        printerFn(`${row.timeFormatted()} || ${row.descriptionFormatted()} || ${row.amountFormatted()} || ${row.balance}`)
+        printerFn(`${row.timeFormatted()} || ${row.descriptionFormatted()} || ${row.hideAmount ? "" : row.amountFormatted()} || ${row.balance}`)
       })
-      printerFn(`${this.previousBalance().timeFormatted()} || ${this.previousBalance().descriptionFormatted()} ||  || ${this.previousBalance().amountFormatted()}`)
   }
 
   statementHeader(){
     return "date || description || amount || balance"
-  }
-  previousBalance(){
-    const result = Operations.previousBalance(Amount.EUR("865"), "01/10/2018")
-    return result
   }
 }
 
