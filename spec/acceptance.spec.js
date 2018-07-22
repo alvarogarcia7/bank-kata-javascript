@@ -16,7 +16,7 @@ describe('Bank kata', () => {
       beforeEach(function () {
         clock = Clock.aNew();
         lines = []
-        account = Account.aNew(clock)
+        account = Account.aNew(clock, [])
       })
 
       it('produces a statement after a few operations', () => {

@@ -4,9 +4,9 @@ const Operations = require('./operations')
 const Amount = require('./amount')
 
 class Account {
-  constructor(clock){
+  constructor(clock, movements){
     this.clock = clock
-    this.movements = []
+    this.movements = movements || []
   }
   withdrawal(description, amount){
     amount.negative()

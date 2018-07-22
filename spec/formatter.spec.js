@@ -15,7 +15,7 @@ describe('formatter', ()=> {
   beforeEach(function () {
     clock = Clock.aNew();
     lines = []
-    account = Account.aNew(clock)
+    account = Account.aNew(clock, [])
   })
 
   it('prints the header', () => {
