@@ -18,11 +18,13 @@ describe('Bank kata', () => {
       })
 
       it('produces a statement after a few operations', () => {
-        sinon.stub(clock, 'getTime').returns("30/10/2018", "20/10/2018");
+        sinon.stub(clock, 'getTime')
+          .onFirstCall().returns("20/10/2018")
+          .onSecondCall().returns("30/10/2018")
         var account = Account.aNew(clock)
 
-        account.withdrawal("payslip", Amount.EUR("100"))
-        account.deposit("grocery shopping", Amount.EUR("15"))
+        account.withdrawal("grocery shopping", Amount.EUR("15"))
+        account.deposit("payslip", Amount.EUR("100"))
         account.printStatement(line=>{lines.push(line)})
 
         expect(lines).to.deep.equals([

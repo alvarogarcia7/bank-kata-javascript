@@ -7,8 +7,6 @@ class Operation{
     this.time = time
   }
   cumulate(otherAmount){
-//    console.log(this)
-//    console.log(otherAmount)
     this.amount.add(otherAmount)
   }
   amountFormatted(){

@@ -9,10 +9,12 @@ class Account {
     this.movements = []
   }
   withdrawal(description, amount){
-    this.movements.push(Operations.withdrawal(description, amount.negative(), this.clock.getTime()))
+    amount.negative()
+    this.movements.push(Operations.withdrawal(description, amount, this.clock.getTime()))
   }
   deposit(description, amount){
-    this.movements.push(Operations.deposit(description, amount, this.clock.getTime()))
+    var date = this.clock.getTime()
+    this.movements.push(Operations.deposit(description, amount, date))
   }
   printStatement(printerFn){
     printerFn(this.statementHeader())
@@ -26,7 +28,6 @@ class Account {
         return row
       })
       .map (row => {
-        console.log(row)
         return row
       })
       .reverse()
@@ -41,7 +42,6 @@ class Account {
   }
   previousBalance(){
     const result = Operations.previousBalance(Amount.EUR("865"), "01/10/2018")
-    //console.log(result)
     return result
   }
 }
